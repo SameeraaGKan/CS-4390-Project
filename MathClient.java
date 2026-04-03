@@ -4,7 +4,9 @@ import java.util.Random;
 
 public class MathClient {
     public static void main(String[] args) throws Exception {
-        String name = "NAS"; // Example name
+        BufferedReader userInput = new BufferedReader(new InputStreamReader(System.in));
+        System.out.print("Enter your name: ");
+        String name = userInput.readLine();
         String serverIP = "127.0.0.1";
         int port = 6789;
 
