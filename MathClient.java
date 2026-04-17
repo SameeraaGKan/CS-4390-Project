@@ -32,7 +32,12 @@ public class MathClient {
                 Thread.sleep(rand.nextInt(3000)); // Random delay to simulate real usage
                 String request = MathProtocol.buildMathRequest(ops[rand.nextInt(ops.length)], rand.nextInt(50), rand.nextInt(50));
                 outToServer.writeBytes(request + "\n");
-                System.out.println("Sent: " + request + " | Server: " + inFromServer.readLine());
+                String serverResponse = inFromServer.readLine();
+                if (serverResponse != null && serverResponse.startsWith(MathProtocol.ERROR)) {
+                    System.out.println("Sent: " + request + " | Server error: " + serverResponse.split(MathProtocol.SEPARATOR)[1]);
+                } else {
+                    System.out.println("Sent: " + request + " | Server: " + serverResponse);
+                }
             }
 
             // Notify server to close connection after requests are done

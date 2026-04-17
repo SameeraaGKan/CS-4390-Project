@@ -5,6 +5,7 @@ public class MathProtocol {
     public static final String MATH_REQ = "MATH_REQ";
     public static final String CLOSE = "CLOSE";
     public static final String RESULT = "RESULT";
+    public static final String ERROR = "ERROR"; // Server sends this when operation is invalid
 
     // Separator used to split message fields during parsing
     public static final String SEPARATOR = ":";

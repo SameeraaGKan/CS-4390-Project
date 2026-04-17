@@ -70,6 +70,15 @@ class ClientHandler extends Thread {
                         String op = p[1];
                         int n1 = Integer.parseInt(p[2]);
                         int n2 = Integer.parseInt(p[3]);
+
+                        // Check for division by zero before calculating
+                        if (op.equalsIgnoreCase("DIV") && n2 == 0) {
+                            System.out.println("[" + LocalDateTime.now() + "] ERROR | " + name + " | DIV by zero");
+                            try { outToClient.writeBytes(MathProtocol.ERROR + MathProtocol.SEPARATOR + "Division by zero\n"); }
+                            catch (IOException e) { e.printStackTrace(); }
+                            return;
+                        }
+
                         int result = calculate(op, n1, n2);
                         System.out.println("[" + LocalDateTime.now() + "] REQUEST | " + name + " | " + op + " | " + n1 + " | " + n2);
                         try { outToClient.writeBytes("RESULT" + MathProtocol.SEPARATOR + result + "\n"); }
